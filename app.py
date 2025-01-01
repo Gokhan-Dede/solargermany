@@ -463,7 +463,8 @@ else:
         fig.update_layout(
             margin={"r": 0, "t": 50, "l": 0, "b": 0},
             height=700,
-            dragmode=False
+            dragmode=False,
+            hovermode=False,
         )
 
         # Highlight the selected state
@@ -559,6 +560,8 @@ else:
             barmode='overlay',  # Overlay bars for better comparison
             plot_bgcolor='white',  # White background for clarity
             template='plotly_white',  # Clean white template for aesthetics
+            dragmode=False,
+            hovermode=False,
             yaxis=dict(
                 type='log',  # Apply logarithmic scale to y-axis
                 autorange=True,  # Auto range for logarithmic scale
@@ -789,6 +792,8 @@ else:
             barmode='stack',
             plot_bgcolor='white',
             template='plotly_white',
+            dragmode=False,
+            hovermode=False,
             xaxis=dict(
                 tickmode='array',
                 tickvals=city_data['CommissioningYear'],
