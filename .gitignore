@@ -1,31 +1,48 @@
-.env
-
-# OS generated files #
-######################
+# Standard python ignores
 .DS_Store
 __MACOSX
-# Jupiter Notebook #
 .pytest_cache
-__pycache__
-*checkpoint.ipynb
-*.ipynb_checkpoints
-
-# inteliJ #
-.idea
-*.gz
-*PKG-INFO
 *.egg-info
-*.csv
-05-ML/**/*.txt
-06-Deep-Learning/**/*.txt
-*.zip
-mlruns
-*.sqlite
-# IDE #
+.coverage
+.ipynb_checkpoints
+*checkpoint.ipynb
+**/__pycache__/
+.python-version
+*.pyc
+*.pyo
+*.pyd
+.log
+**/build
+# Ignore these Windows generated files
+*Zone.Identifier
+# Ignore VS Code generated files
 *.vscode
-
-# Specific Challenges
-06-Deep-Learning/03-Convolutional-Neural-Networks/04-Transfer-Learning/flowers/
-
-# Challengify - test challengification files
-*_challengify*
+# Raw data
+!data/solar_visualization.csv
+!model/xgb_full_pipeline.pkl
+*.csv
+*.sqlite
+*.zip
+# Data in the package
+# Add files you want to include in the git repo using `git add -f file_name`
+data/
+geojson/
+notebooks/*.ipynb_checkpoints/
+# Saved models
+model/
+*.joblib
+*.h5
+*.keras
+*.pt
+# Any pickle files
+*.pickle
+*.pckl
+*.pkl
+# Credentials (or files with potentially credentials inside)
+.env
+.env.yaml
+.credentials
+secrets.toml
+*.json
+*.dockerignore
+docker-compose.override.yml

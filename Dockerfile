@@ -1,15 +1,20 @@
+# Use the official Python image as the base image
 FROM python:3.10-slim
 
-WORKDIR /solar_app
+# Set the working directory in the container
+WORKDIR /app
 
-COPY solar_germany /solar_app/solar_germany
+# Copy the requirements file
+COPY requirements.txt .
 
-COPY .env /solar_app/.env
+# Install the dependencies
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY requirements.txt /solar_app/requirements.txt
+# Copy the entire app to the container
+COPY . .
 
-RUN pip install --upgrade pip && pip install --no-cache-dir -r /solar_app/requirements.txt
+# Expose the port Streamlit runs on
+ENV PORT=8080
 
-ENV PORT=8501
-
-CMD uvicorn brainmap.api.fast:app --host 0.0.0.0 --port $PORT
+# Run the Streamlit app
+CMD streamlit run app.py --server.port $PORT --server.address 0.0.0.0
