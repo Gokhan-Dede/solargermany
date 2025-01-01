@@ -58,7 +58,7 @@ def preprocess_solar_data(
     - Preprocess and save processed data iteratively.
     """
 
-    st.spinner("Preprocessing solar panel data...")
+    print(Fore.MAGENTA + "\n ⭐️ Preprocessing solar data by batch" + Style.RESET_ALL)
 
     # Paths for local storage
     raw_data_path = Path(LOCAL_DATA_PATH).joinpath(f"raw_solar_data_{min_year}_{max_year}.csv")

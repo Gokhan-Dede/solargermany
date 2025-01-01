@@ -194,7 +194,7 @@ if 'state' not in st.session_state:
 state = st.session_state.state
 
 st.sidebar.markdown(
-    "<p style='font-size: 14px;'>Note: The data preprocessing might take some time depending on the selected year range.</p>",
+    "<p style='font-size: 14px;'>Note: Data for 2000–2024 is ready. Custom ranges require retrieval and preprocessing time.</p>",
     unsafe_allow_html=True
 )
 
@@ -215,6 +215,20 @@ if os.path.exists(processed_data_path):
     data = load_processed_data(processed_data_path)
 else:
     data = pd.DataFrame()  # Empty dataframe to avoid further errors
+
+
+st.markdown("""
+    <style>
+        /* Target the horizontal rule (---) in the sidebar */
+        .stSidebar hr {
+            margin-top: 20px;  /* Adjust the space above the horizontal line */
+            margin-bottom: 20px;  /* Adjust the space below the horizontal line */
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Sidebar separator
+st.sidebar.markdown("---")
 
 # Filter data only after it's available
 if not data.empty:
@@ -277,10 +291,10 @@ st.sidebar.markdown(
     """
     <div style="font-size: 14px; color: #333;">
         <p><strong>Gökhan Dede, Data Scientist </strong></p>
-        <p><a href="mailto:gokhandede.ai@gmail.com" style="text-decoration: none; color: #1f77b4;">gokhandede.ai@gmail.com</a>
+        <p><a href="mailto:gokhandede.ai@gmail.com" style="text-decoration: none; color: #1f77b4;">gokhandede.ai@gmail.com</a></p>
+        <p><a href="https://www.linkedin.com/in/gokhan-dede/" target="_blank" style="text-decoration: none; color: #0077b5;">LinkedIn</a>
         <a>|</a>
-        <a href="https://www.linkedin.com/in/gokhan-dede/" target="_blank" style="text-decoration: none; color: #0077b5;">LinkedIn</a>
-        </p>
+        <a href="https://github.com/Gokhan-Dede/solargermany" target="_blank" style="text-decoration: none; color: #0077b5;">GitHub</a></p>
     </div>
     """,
     unsafe_allow_html=True
@@ -329,6 +343,22 @@ st.markdown("""
 
 
 
+st.markdown("""
+    <style>
+        /* Reduce the gap above the main tabs container */
+        .stTabs {
+            margin-top: -100px;  /* Adjust this value to reduce the gap further */
+            padding-top: 0px;  /* Remove any additional padding at the top */
+        }
+
+        /* Reduce the gap above the overall main container */
+        .main {
+            padding-top: 0px !important;  /* Remove the default padding at the top of the page */
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+
 
 # Tabs for better organization
 tab1, tab2, tab3, tab4 = st.tabs(["Overview", "State Insights", "Regional Focus", "Solar Power Forecast"])
@@ -341,25 +371,60 @@ with tab1:
 
     # Welcome Card (always shown)
     st.markdown("""
+        <style>
+            .info-card-title h5 {
+                margin-top: 10px;
+                margin-bottom: 0px !important; /* Completely remove the gap below the heading */
+                padding-bottom: 0px;         /* Add a controlled padding if needed */
+                font-size: 20px;             /* Adjust font size (optional) */
+                color: #333;                 /* Darker text for the heading */
+            }
+            .info-card-content p {
+                margin-top: 0px !important;  /* Remove the gap above the paragraph */
+                margin-bottom: 8px;
+                line-height: 1.5;            /* Adjust line spacing for better readability */
+                font-size: 16px;             /* Paragraph font size */
+                color: #555;                 /* Softer gray for content text */
+            }
+            .info-card-content ul {
+                margin-top: 6px;            /* Space above the list */
+                margin-bottom: 6px;         /* Space below the list */
+                padding-left: 20px;          /* Add some padding to align list items */
+            }
+        </style>
+
         <div class="info-card">
-            <div class="info-card-title">Welcome to SolarGermany</div>
+            <div class="info-card-title">
+                SolarGermany - Empowering a Sustainable Future
+            </div>
             <div class="info-card-content">
-                Discover Germany's solar energy landscape with <b>SolarGermany</b>—an interactive platform designed for researchers, policymakers, and sustainability enthusiasts.
-                <br><br>
-                Explore solar panel data across states and regions, uncover trends, and gain actionable insights into the performance and growth of solar energy in Germany.
-                <br><br>
-                <b>Key Features:</b>
+                <p>
+                    Discover Germany's solar energy landscape with <strong>SolarGermany</strong>—an interactive platform designed for researchers, policymakers, and sustainability enthusiasts.
+                </p><p>
+                    Explore solar panel data across states and regions, uncover trends, and gain actionable insights into the performance and growth of solar energy in Germany.
+                </p>
                 <ul>
-                    <li><b>Interactive Data Visualization</b>: Navigate solar panel distributions by state, region, district, and year.</li>
-                    <li><b>In-Depth Insights</b>: Analyze growth trends, efficiency changes, and key metrics tailored to specific regions.</li>
-                    <li><b>Performance Metrics</b>: Access data on total modules, gross power generation, and efficiency.</li>
-                    <li><b>Solar Power Prediction</b>: Estimate energy generation using real-time data and regional parameters.</li>
+                    <li><strong>Interactive Data Visualization</strong>: Navigate solar panel distributions by state, region, district, and year.</li>
+                    <li><strong>In-Depth Insights</strong>: Analyze growth trends, efficiency changes, and key metrics tailored to specific regions.</li>
+                    <li><strong>Performance Metrics</strong>: Access data on total modules, gross power generation, and efficiency.</li>
+                    <li><strong>Solar Power Prediction</strong>: Estimate energy generation using real-time data and regional parameters.</li>
                 </ul>
-                Empower your decision-making with a comprehensive view of Germany’s renewable energy progress.
+                <p>
+                    Empower your decision-making with a comprehensive view of Germany’s renewable energy progress.
+                </p>
+                <div class="info-card-title">
+                    <h5>Solar Power Forecast</h5>
+                </div>
+                <p>
+                    This web application predicts the <strong>Net Rated Power (MW)</strong> and <strong>Gross Power (MW)</strong> of solar panels using parameters like <em>State</em>, <em>Administrative Region</em>, <em>Main Orientation</em>, and <em>Assigned Active Power Inverter</em>.
+                    Powered by a machine learning model, it delivers accurate predictions based on historical solar panel data.
+                </p>
+                <p>
+                    <strong>The dataset, sourced from the <em>Marktstammdatenregister (MaStR)</em> as of 01.10.2024, covers 3,246,859 registered solar panels in Germany.</strong>
+                </p>
             </div>
         </div>
     """, unsafe_allow_html=True)
-
     # How It Works Card (always shown)
     st.markdown("""
         <div class="info-card">
@@ -370,7 +435,7 @@ with tab1:
                     <li><b>Deep Dive into Regions</b>: Use the <b>Regional Focus</b> tab to explore specific districts within a state. View detailed data on gross power, efficiency, and feed-in types.</li>
                     <li><b>Predict Solar Power</b>: In the <b>Power Forecast</b> tab, input solar panel details like orientation and inverter capacity to estimate energy generation potential.</li>
                 </ol>
-                Together, let’s explore how solar power is transforming Germany’s journey toward sustainability.
+                <strong>Together, let’s explore how solar power is transforming Germany’s journey toward sustainability.</strong>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -831,7 +896,7 @@ else:
         # Solar Panel Prediction Tool Card
         st.markdown("""
             <div class="info-card">
-                <div class="info-card-title">Solar Panel Power Prediction Tool</div>
+                <div class="info-card-title">Solar Panel Power Forecast</div>
                 <div class="info-card-content">
                     By selecting your <b>State</b>, <b>Administrative Region</b>, and <b>District</b>, you can predict the solar panel power generation for your setup.
                     <br><br>
